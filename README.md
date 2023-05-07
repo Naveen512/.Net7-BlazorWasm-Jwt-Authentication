@@ -1,7 +1,7 @@
 ## A Demo On Clean Architecture | MediatR CQRS Pattern | .NET7 Web API
 
 ## Blog for step by step guidance
-- A Demo On Clean Architecture | MediatR CQRS Pattern | .NET7 Web API(https://www.learmoreseekmore.com/2023/03/demo-on-clean-architecture-mediatr-cqrs-pattern-dotnet7-web-api.html)
+- Blazor WebAssembly[.NET 7] JWT Authentication Series(https://www.learmoreseekmore.com/2023/03/part1-blazorwebassembly-dotnet7-jwt-authentication-series-user-registratio.html)
 
 ## Stay in touch
 - Author - Naveen Bommidi
