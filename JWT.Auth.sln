@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWT.Auth.BlazorUI", "JWT.Auth.BlazorUI\JWT.Auth.BlazorUI.csproj", "{1E1FB505-12C2-461C-95E3-2BBF090CF555}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jwt.Auth.API", "Jwt.Auth.API\Jwt.Auth.API.csproj", "{9C5DA5BE-B40D-4BE8-8A8A-343E276E3DE7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E1FB505-12C2-461C-95E3-2BBF090CF555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E1FB505-12C2-461C-95E3-2BBF090CF555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E1FB505-12C2-461C-95E3-2BBF090CF555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E1FB505-12C2-461C-95E3-2BBF090CF555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C5DA5BE-B40D-4BE8-8A8A-343E276E3DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C5DA5BE-B40D-4BE8-8A8A-343E276E3DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C5DA5BE-B40D-4BE8-8A8A-343E276E3DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C5DA5BE-B40D-4BE8-8A8A-343E276E3DE7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A08F8086-C996-46D3-B6E9-0F9F9DD7A5B1}
+	EndGlobalSection
+EndGlobal

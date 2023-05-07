@@ -1,0 +1,93 @@
+﻿@page "/login"
+@using System.Text.Json;
+@using System.Text;
+@using System.Net;
+@using JWT.Auth.BlazorUI.Shared.Providers;
+@inject IHttpClientFactory _httpClientFactory;
+@inject ILocalStorageService _localStorageService;
+@inject AuthenticationStateProvider _authStateProvider;
+@inject NavigationManager _navigationManager;
+<div class="ma-6 d-flex justify-center">
+    <MudChip Color="Color.Primary">
+        <h3>User Registration Form</h3>
+
+    </MudChip>
+</div>
+<div class="ma-6 d-flex justify-center">
+    <MudCard Width="500px">
+        <MudForm Model="loginModel" @ref="form" Validation="loginValidator.ValidateValue">
+            <MudCardContent>
+                @if (!string.IsNullOrEmpty(APIErrorMessages))
+                {
+                    <MudChip Class="d-flex justify-center" Color="Color.Error">
+                        <p>@APIErrorMessages</p>
+
+                    </MudChip>
+                }
+                
+                <MudTextField @bind-Value="loginModel.Email"
+                              For="@(() => loginModel.Email)"
+                              Immediate="true"
+                              Label="Email" />
+                <MudTextField @bind-Value="loginModel.Password"
+                              For="@(() => loginModel.Password)"
+                              Immediate="true"
+                              Label="Password" InputType="InputType.Password" />
+               
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="LoginAsync" >Login</MudButton>
+            </MudCardActions>
+        </MudForm>
+    </MudCard>
+</div>
+
+@code {
+    LoginVm loginModel = new LoginVm();
+
+    LoginValidationVm loginValidator = new LoginValidationVm();
+
+    MudForm form;
+
+    string APIErrorMessages;
+
+    private async Task LoginAsync()
+    {
+        await form.Validate();
+        if (form.IsValid)
+        {
+            var jsonPayload = JsonSerializer.Serialize(loginModel);
+            var requestContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+            var httpClient = _httpClientFactory.CreateClient("Dot7Api");
+            var response = await httpClient.PostAsync("api/User/login", requestContent);
+
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var errors = await response.Content.ReadFromJsonAsync<Dictionary<string, List<string>>>();
+                if (errors.Count > 0)
+                {
+                    foreach (var item in errors)
+                    {
+                        foreach (var errorMessage in item.Value)
+                        {
+                            APIErrorMessages = $"{APIErrorMessages} | {errorMessage}";
+                        }
+                    }
+                }
+            }
+            else if (response.StatusCode == HttpStatusCode.OK)
+            {
+                //_navigationManager.NavigateTo("/registration-confirmation");
+                var tokenResponse = await response.Content.ReadFromJsonAsync<JwtTokenResponseVm>();
+                await _localStorageService.SetItemAsync<string>("jwt-access-token", tokenResponse.AccessToken);
+                (_authStateProvider as CustomAuthProvider).NotifyAuthState();
+                _navigationManager.NavigateTo("/fetchdata");
+            }
+            else
+            {
+                APIErrorMessages = "Login Failed Plase try after some time";
+
+            }
+        }
+    }
+}
